@@ -1,4 +1,4 @@
-<html>
+<html manifest="cache.manifest">
 <style>
 .modal {
   display: none; /* Hidden by default */
@@ -177,10 +177,15 @@
 .pointer {cursor: pointer;}
 </style>
 <head>
-	<title>PS4MACEDO 7.55 (via Guia do Usuário)</title>
+	<title>PS4MACEDO 7.55 Superlight4 (Jb15062021+Goldhen11)</title>
 </head>
 	<br><br><br><br><br><br><br><br><br><br><br><br>
 	<body onload="go()" class="bg">
+		<script>
+			window.applicationCache.ondownloading=function(){document.getElementById("progress").innerHTML="Instalando Cache Offline... <font color=\"#ee596f\"> Aguarde!!!</font>";localStorage.isCached=false;};
+			window.applicationCache.onprogress=function(a){document.getElementById("myBar").style.width=(Math.round(100*(a.loaded/a.total)))+"%";document.getElementById("myBar").innerHTML=(Math.round(100*(a.loaded/a.total)))+"%";};
+			window.applicationCache.oncached=function(){document.getElementById("progress").innerHTML="Cache <font color=\"#ee596f\">instalada</font> com sucesso!!!";localStorage.isCached=true;setTimeout(function(){document.getElementById("progress").innerHTML="Agora saia usando o <font color=\"#ee596f\">CIRCULO, desabilite a rede</font> e retorne ao guia ou navegador."; }, 2600);};
+		</script>
 		<script>
 			var width = 0;
 			function frame1() {
@@ -215,12 +220,12 @@
 		
 		function done(){
 			document.getElementById("myProgress").remove();
-			document.getElementById("progress").innerHTML="Exploração do kernel concluída!!! Agora preparando o restore... Por favor, <font color=\"#ee596f\">AGUARDE!!!</font>";
-			preloadScripts(['preloader.js', 'restore.js', 'loader.js']);
+			document.getElementById("progress").innerHTML="Exploração do kernel concluída!!! Agora injetando Goldhen v1.1... Por favor, <font color=\"#ee596f\">AGUARDE!!!</font>";
+			preloadScripts(['preloader.js', 'goldhen11.js', 'loader.js']);
 
 			if(window.postPayload)
 				window.postPayload();
-			setTimeout(function(){document.getElementById("progress").innerHTML="<font color=\"#ee596f\"><b>Restore efetuado com sucesso!</b></font><br><br>B o a&nbsp&nbsp&nbspd i v e r s ã o ! ! !"; }, 7000);	
+			setTimeout(function(){document.getElementById("progress").innerHTML="<font color=\"#ee596f\"><b>Goldhen versão 1.1 injetado com sucesso!</b></font><br><br>B o a&nbsp&nbsp&nbspd i v e r s ã o ! ! !"; }, 7000);	
 		}
 		
 		window.midExploit = function()
